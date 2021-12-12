@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
-const connection = require('./config/database')
+const connection = require('./database/connection')
 
-app.listen(3000, async () => {
+app.listen(3000, () => {
     console.log('Servidor rodando na porta 3000')
 })

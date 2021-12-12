@@ -8,7 +8,7 @@ module.exports = class BlogService{
     static async findById(id){
         const sql = `select * from blog where id=${id};`
         const result = await query(sql)
-        return result.length != 0 ? result:false
+        return result.length != 0 ? result[0]:false
     }
     static async insert(blog){
         const sql = `insert into blog(titulo, texto, datacriacao) values('${blog.titulo}', '${blog.texto}', curdate())`

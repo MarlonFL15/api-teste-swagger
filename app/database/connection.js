@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 const {host, user, password, database} = require('./config.json')
-
+const util = require('util')
 
 const connection = mysql.createConnection(
     {
@@ -11,5 +11,5 @@ const connection = mysql.createConnection(
         
     }
 )
-
-module.exports = connection
+const query = util.promisify(connection.query).bind(connection);
+module.exports = {connection, query}

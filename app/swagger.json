@@ -1,0 +1,276 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de teste - swagger",
+        "description": "API desenvolvida em node.js para aprender a usar a ferramenta swagger",
+        "termsOfService": "http://localhost:3000/termos",
+        "contact": "marlonfleite50@gmail.com",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000",
+            "description": "Servidor de desenvolvimento"
+        }
+    ],
+    "paths": {
+        "/blog": {
+            "post": {
+                "summary": "Cadastro de blog",
+                "description": "Essa rota será responsável por cadastrar um novo blog",
+                "tags": ["blogs"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                
+                            },
+                            "examples": {
+                                "blog":{
+                                    "value":{
+                                        "titulo": "Título do blog",
+                                        "texto": "Texto do blog"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200":{
+                        "description": "ok"
+                    },
+                    "400":{
+                        "description": "error",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/blog/{blogId}":{
+            "get": {
+                "summary": "Listagem de blog por id",
+                "description": "Essa rota será responsável por listar blog por id",
+                "parameters": [
+                    {
+                        "name": "blogId",
+                        "in": "path",
+                        "description": "Id do blog a ser consultado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                          }
+                    }
+                ],
+                "tags": ["blogs"],
+                "responses": {
+                    "200":{
+                        "description": "ok"
+                    },
+                    "400":{
+                        "description": "error",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Alterar blog por id",
+                "description": "Essa rota será responsável por alterar blog por id",
+                "parameters": [
+                    {
+                        "name": "blogId",
+                        "in": "path",
+                        "description": "Id do blog a ser alterado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                          }
+                    }
+                ],
+                "tags": ["blogs"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                
+                            },
+                            "examples": {
+                                "blog":{
+                                    "value":{
+                                        "titulo": "Título do blog",
+                                        "texto": "Texto do blog"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200":{
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/blog_cadastro"
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description": "error",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Deletar blog por id",
+                "description": "Essa rota será responsável por deletar blog por id",
+                "parameters": [
+                    {
+                        "name": "blogId",
+                        "in": "path",
+                        "description": "Id do blog a ser deletado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                          }
+                    }
+                ],
+                "tags": ["blogs"],
+                "responses": {
+                    "200":{
+                        "description": "ok"
+                    },
+                    "400":{
+                        "description": "error",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        },
+
+        "/blogs": {
+            "get": {
+                "summary": "Listagem de blogs",
+                "description": "Essa rota será responsável por listar todos os blogs cadastrados",
+                "tags": ["blogs"],
+                "responses": {
+                    "200":{
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items":{
+                                        "$ref": "#/components/schemas/blog_cadastro"
+                                    }
+                                    
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description": "error",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete":{
+                "summary": "Deletar todos os blogs",
+                "description": "Essa rota será responsável por deletar todos os blogs cadastrados",
+                "tags": ["blogs"],
+                "responses": {
+                    "200":{
+                        "description": "ok"
+                    },
+                    "400":{
+                        "description": "error",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        }
+                    }
+                } 
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "blog_cadastro":{
+                "type": "object",
+                "properties": {
+                    "titulo": {
+                        "type": "string"
+                    },
+                    "texto": {
+                        "type": "string"
+                    }
+                }
+            },
+            "blog_response":{
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "int"
+                    },
+                    "titulo": {
+                        "type": "string"
+                    },
+                    "texto": {
+                        "type": "string"
+                    },
+                    "data_criacao": {
+                        "type": "date"
+                    }
+                }
+            },
+            "error":{
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string"
+                    }
+                }
+            }
+            
+        }
+    }
+    
+}
